@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { MercadoPagoConfig, Preference } from 'mercadopago'
 
 // Configurar el cliente de Mercado Pago
-const client = new MercadoPagoConfig({ 
-  accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || '' 
+const client = new MercadoPagoConfig({
+  accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || ''
 })
 
 export async function POST(request: NextRequest) {
@@ -14,13 +14,16 @@ export async function POST(request: NextRequest) {
     const preference = new Preference(client)
 
     // URL base para las redirecciones
+    const configuredBaseUrl = process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, '')
+    const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null
     const host = request.headers.get('host') || 'localhost:3000'
     const protocol = host.includes('localhost') ? 'http' : 'https'
-    const baseUrl = `${protocol}://${host}`
-    const isLocalhost = host.includes('localhost')
+    const requestBaseUrl = `${protocol}://${host}`
+    const baseUrl = configuredBaseUrl || vercelUrl || requestBaseUrl
 
     console.log('Base URL for redirects:', baseUrl)
-    console.log('Is localhost:', isLocalhost)
+    console.log('Configured base URL:', configuredBaseUrl)
+    console.log('Vercel URL:', vercelUrl)
 
     // Construir la preferencia
     const preferenceData: any = {

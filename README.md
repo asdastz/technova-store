@@ -50,6 +50,17 @@ pnpm dev
 
 4. Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
+## 🔐 Variables de Entorno
+
+1. Copia el archivo de ejemplo:
+```bash
+cp env.example .env.local
+```
+2. Completa los valores:
+   - `MERCADOPAGO_ACCESS_TOKEN`: token privado de Mercado Pago para crear pagos.
+   - `NEXT_PUBLIC_APP_URL`: URL base pública del sitio (ej. `http://localhost:3000` en desarrollo o `https://tu-app.vercel.app` en producción).
+3. Reinicia el servidor de desarrollo después de modificar el archivo.
+
 ## 📁 Estructura del Proyecto
 
 ```
@@ -101,7 +112,8 @@ Edita los archivos en la carpeta `data/`:
 
 1. Sube tu código a GitHub
 2. Importa tu proyecto en [Vercel](https://vercel.com)
-3. Vercel detectará automáticamente Next.js y configurará todo
+3. En la sección **Environment Variables** agrega `MERCADOPAGO_ACCESS_TOKEN` y `NEXT_PUBLIC_APP_URL`
+4. Vercel detectará automáticamente Next.js y configurará todo
 
 ### Otros Proveedores
 
